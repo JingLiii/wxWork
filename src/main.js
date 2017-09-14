@@ -13,6 +13,11 @@ fastclick.attach(document.body)
 // 引入样式
 import './common/stylus/index.stylus'
 
+// 引入字体图标
+import Icon from './components/icon/icon.vue'
+import './common/icons/index'
+Vue.component('icon', Icon)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

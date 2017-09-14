@@ -19,3 +19,11 @@ extend-click()
     left: -10px
     right: -10px
     bottom: -10px
+
+// 居中
+position-absolute($top, $left, $margin-top, $margin-left)
+  position: absolute
+  top $top
+  left $left
+  margin-top: $margin-top
+  margin-left: $margin-left
