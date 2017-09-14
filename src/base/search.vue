@@ -1,9 +1,9 @@
 <template>
   <div class="search">
     <div class="input-out">
-      <div @click="clickPlaceholer" v-show="!inputContent" v-text="placeholder" class="placeholder">
-      </div>
-      <input type="search" ref="input" v-model="inputContent">
+      <!-- <div @click="clickPlaceholer" v-show="!inputContent" v-text="placeholder" class="placeholder">
+      </div> -->
+      <input type="search" ref="input" :placeholder="placeholder" v-model="inputContent">
       <icon class="icon" name="search"></icon>
       <ul class="search-list" ref="searchList">
         <li v-for="res in searchRes" :key="res" v-text="res"></li>
@@ -18,12 +18,6 @@ export default {
   data () {
     return {
       inputContent: ''
-    }
-  },
-  methods: {
-    // 点击了占位模块, 使得input获得焦点
-    clickPlaceholer() {
-      this.$refs.input.focus()
     }
   },
   // 只要文本框内的内容改变了, 然后稍微一等就告诉父组件.
@@ -60,11 +54,6 @@ export default {
       position-absolute 50% 50% (-46rem/64) (-690rem/64) 
       width (690rem/32)
       height (46rem/32)
-      .placeholder
-        position-absolute 0 (60rem/32) 0 0
-        width (300rem/32)
-        height (46rem/32)
-        line-height (50rem/32)
       input
         paddding 0 (56rem/32)
         width (690rem/32)
@@ -76,8 +65,10 @@ export default {
         font-size $font-size-text
         color $color-text-dd
         padding-left (56rem/32)
-      input[type='search']::-webkit-search-cancel-button 
+      input[type='search']::-webkit-search-cancel-button
           display none
+      input[type='search']::-webkit-input-placeholder
+          color $color-input-text
       .icon
         position-absolute 50% (22rem/32) (-20rem/64) 0
         width (20rem/32)
