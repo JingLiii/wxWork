@@ -1,3 +1,10 @@
+// 搜索组件
+// 属性
+// placeholder: 占位符内容  searchRes: 搜索到的匹配数据
+// 事件
+// search: 每一次键盘抬起事件, 参数为输入框里的内容
+
+
 <template>
   <div class="search">
     <div class="input-out">
@@ -13,39 +20,39 @@
 </template>
 
 <script>
-export default {
-  name: 'Search',
-  data () {
-    return {
-      inputContent: ''
-    }
-  },
-  // 只要文本框内的内容改变了, 然后稍微一等就告诉父组件.
-  watch: {
-    inputContent(newInput) {
-      this.$emit('search', newInput)
-    }
-  },
-  props: {
-    // 占位的内容: 父组件传入
-    placeholder: {
-      type: String,
-      default: '提示搜索内容'
+  export default {
+    name: 'Search',
+    data () {
+      return {
+        inputContent: ''
+      }
     },
-    // 搜索结果: 展示在ul中
-    searchRes: {
-      type: Array,
-      default: function () {
-        return []
+    // 只要文本框内的内容改变了, 然后稍微一等就告诉父组件.
+    watch: {
+      inputContent(newInput) {
+        this.$emit('search', newInput)
+      }
+    },
+    props: {
+      // 占位的内容: 父组件传入
+      placeholder: {
+        type: String,
+        default: '提示搜索内容'
+      },
+      // 搜索结果: 展示在ul中
+      searchRes: {
+        type: Array,
+        default: function () {
+          return []
+        }
       }
     }
   }
-}
 </script>
 
 <style lang="stylus" scoped>
-  @import "../common/stylus/variable.stylus"
-  @import "../common/stylus/mixin.stylus"
+  @import "../../common/stylus/variable.stylus"
+  @import "../../common/stylus/mixin.stylus"
 
   .search
     height (90rem/32)
