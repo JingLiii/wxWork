@@ -1,9 +1,13 @@
 <template>
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div data-swiper-autoplay="2000" class="swiper-slide" :key="str.url" v-for="str in listImg" :style="{ backgroundImage: 'url(' + str.url + ')' }"></div>
+            <div
+              class="swiper-slide" 
+              :key="str.url" v-for="str in listImg" 
+              :style="setImageStyle(str.url)"
+            ></div>
         </div>
-        <div class="swiper-pagination swiper-pagination-white"></div>
+        <div class="swiper-pagination"></div>
     </div>
 </template>
 
@@ -31,16 +35,24 @@
         ]
       }
     },
+    methods: {
+      setImageStyle(url) {
+        return `background-image: url(${url}); background-size: cover`
+      }
+    },
     mounted () {
-      console.log('mounted', this)
       var swiper = new Swiper('.swiper-container', {
+        // 分页挂载到哪个元素上
         pagination: '.swiper-pagination',
-        paginationClickable: true,
-        loop: true,
-        speed: 600,
+        // 点击分页按钮, 是否切换各个分页
+        paginationClickable: false,
+        // 是否循环轮播
+        loop: true, 
+        speed: 300,
         autoplay: 4000,
-        onTouchEnd: function() {
-          swiper.startAutoplay()
+        autoplayDisableOnInteraction: false,
+        paginationBulletRender: function (swiper, index, className) {
+          return `<span class="${className}" style="background: #168fed"></span>`
         }
       });
     }
@@ -48,10 +60,13 @@
 </script>
 
 <style lang="stylus" scoped>
+
+  @import "../../common/stylus/variable.stylus"
+
   .swiper-container
+    background-color $color-background-components
     position relative
     width 100%
-    height 200px
     .swiper-wrapper
       width 100%
       height 100%
@@ -61,9 +76,10 @@
         img
           width 100%
           height 100%
-    .swiper-pagination-bullet
-      width 10px
-      height 10px
-      display inline-block
-      background #fff
+    .swiper-pagination
+      // background red
+      .swiper-pagination-bullet-my
+        background pink
+      .swiper-pagination-bullet-active
+        background green
 </style>

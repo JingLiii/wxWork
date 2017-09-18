@@ -1,8 +1,8 @@
 
 // 颜色定义规范
-$color-background = #f4f4f4
+$color-background-body = #f4f4f4
+$color-background-components = #ffffff
 $color-background-list-hover = #f9f9f9
-$color-background-list = #fff
 
 $color-dialog-background = #666
 
@@ -14,7 +14,6 @@ $color-text = #aaaaaa
 $color-text-d = #7e7e7e
 $color-text-dd = #3b3b3b
 $color-text-l = #a5a5a5
-$color-text-ll = #b3b3b3
 
 $color-input-text= #cccccc
 $color-input-border= #d3d3d3
@@ -23,7 +22,9 @@ $color-warpp-built=#aeaeaa
 
 
 //字体定义规范
+$font-size-text-small = (18rem/32)
 $font-size-text = (20rem/32)
+$font-size-text-large = (26rem/32)
 
 $font-size-small-s = (10rem/32)
 $font-size-small = (12rem/32)

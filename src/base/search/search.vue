@@ -55,15 +55,19 @@
   @import "../../common/stylus/mixin.stylus"
 
   .search
+    width 100%
+    background-color $color-background-components
     height (90rem/32)
     position relative
+    box-sizing border-box
+    padding-top (22rem/32)
     .input-out
-      position-absolute 50% 50% (-46rem/64) (-690rem/64) 
-      width (690rem/32)
+      width (690/750)*100%
+      margin 0 auto
       height (46rem/32)
+      position relative
       input
-        paddding 0 (56rem/32)
-        width (690rem/32)
+        width 100%
         height (46rem/32)
         box-sizing border-box
         border solid (2rem/32) $color-input-border
