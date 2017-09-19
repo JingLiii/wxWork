@@ -41,20 +41,34 @@
       }
     },
     mounted () {
-      var swiper = new Swiper('.swiper-container', {
-        // 分页挂载到哪个元素上
+      new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
-        // 点击分页按钮, 是否切换各个分页
         paginationClickable: false,
-        // 是否循环轮播
+        paginationType: 'custom',
         loop: true, 
         speed: 300,
         autoplay: 4000,
-        autoplayDisableOnInteraction: false,
-        paginationBulletRender: function (swiper, index, className) {
-          return `<span class="${className}" style="background: #168fed"></span>`
+        // 滑动结束后, 继续轮播
+        autoplayDisableOnInteraction: true,
+        // 自定义分页样式
+        paginationCustomRender: function (swiper, current, total) {
+          const activeColor = '#168fed'
+          const normalColor = '#aeaeae'
+          let color = ''
+          let paginationStyle = ''
+          let html = ''
+          for (let i = 1; i <= total; i++) {
+            if (i === current) {
+              color = activeColor
+            } else {
+              color = normalColor
+            }
+            paginationStyle = `background:${color};opacity:1;margin-right:0.875rem;`
+            html += `<span class="swiper-pagination-bullet" style=${paginationStyle}></span>`
+          }
+          return html
         }
-      });
+      })
     }
   }
 </script>
@@ -76,10 +90,4 @@
         img
           width 100%
           height 100%
-    .swiper-pagination
-      // background red
-      .swiper-pagination-bullet-my
-        background pink
-      .swiper-pagination-bullet-active
-        background green
 </style>

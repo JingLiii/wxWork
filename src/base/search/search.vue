@@ -68,7 +68,7 @@
       position relative
       input
         width 100%
-        height (46rem/32)
+        height 100%
         box-sizing border-box
         border solid (2rem/32) $color-input-border
         border-radius (30rem/32)
