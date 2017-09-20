@@ -16,6 +16,8 @@
   import Choose from '../../components/choose/choose'
   import CourseList from "../../components/course-list/course-list.vue"
 
+  import getHomeData from '../../api/home'
+
   export default {
     data () {
       return {
@@ -33,6 +35,16 @@
       search(searchValue) {
         console.log(searchValue)
       }
+    },
+    // 获取数据, 渲染页面
+    created () {
+      setTimeout(() => {
+        getHomeData().then(function (respose) {
+          console.log(respose)
+        }).catch(function (err) {
+          console.log(err)
+        })
+      }, 20);
     }
   }
 </script>
