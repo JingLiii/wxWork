@@ -27,3 +27,15 @@ position-absolute($top, $left, $margin-top, $margin-left)
   left $left
   margin-top: $margin-top
   margin-left: $margin-left
+
+// 清楚浮动
+// clearfix ()
+//   content ''
+//   display block
+//   clear both
+//   height 0
+//   overflow hidden
+//   visibility hidden
+
+// clear-both-zoom()
+//   zoom: 1

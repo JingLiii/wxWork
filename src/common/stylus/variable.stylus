@@ -25,6 +25,7 @@ $color-warpp-built=#aeaeaa
 $font-size-text-small = (18rem/32)
 $font-size-text = (20rem/32)
 $font-size-text-large = (26rem/32)
+$font-size-text-large-x = (36rem/32)
 
 $font-size-small-s = (10rem/32)
 $font-size-small = (12rem/32)

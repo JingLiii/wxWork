@@ -1,11 +1,32 @@
 <template>
   <div class="choose">
-    <div class="choose-box">
-      <icon class="icon" name="search"></icon>
-      <div class="desc">文学</div>
+    <div @click="chooseBox(boxData.cg_name)" class="choose-box" v-for="boxData in propsData" :key="boxData.id">
+      <img class="icon" :src="boxData.cg_lcon" alt="">
+      <div class="desc" v-text="boxData.cg_name"></div>
     </div>
   </div>
 </template>
+
+
+<script>
+  export default {
+    name: 'Choose',
+    methods: {
+      chooseBox(name) {
+        this.$emit('selectBox', name)
+      }
+    },
+    props: {
+      propsData: {
+        type: Array,
+        default: () => {
+          return []
+        }
+      }
+    }
+  }
+</script>
+
 
 <style lang="stylus" scoped>
 
@@ -15,8 +36,13 @@
   .choose
     background-color $color-background-components
     width 100%
+    overflow hidden
+    zoom 1
+    ::after
+      width 100
     .choose-box
-      width 20%
+      float left
+      width 25%
       height (150rem/32)
       position relative
       .icon

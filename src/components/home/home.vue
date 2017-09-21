@@ -1,28 +1,38 @@
 <template>
   <div class="home">
-    <search class="search" @search="search" :searchRes="searchRes" :placeholder="placeholderText"></search>
-    <banner class="banner"></banner>
-    <choose class="choose"></choose>
-    <course-list class="course-list"></course-list>
+    <search class="search" @goSearch="goSearch" :placeholder="placeholderText"></search>
+    <banner class="banner" :listImg="bannerPic"></banner>
+    <choose class="choose" :propsData="professionData" @selectBox="goSearch"></choose>
+    <course-list class="course-list" :propsData="courseListData"></course-list>
     <div class="button-all-out">
-      <button class="button-all">查看全部</button>
+      <button class="button-all" @click="goSearch('全部')">查看全部</button>
     </div>
   </div>
 </template>
 
 <script>
+  // 导入组件
   import Search from '../../base/search/search'
   import Banner from '../../components/banner/banner'
   import Choose from '../../components/choose/choose'
   import CourseList from "../../components/course-list/course-list.vue"
-
+  // 导入api方法
+  import {infoParams} from '../../api/config'
   import getHomeData from '../../api/home'
+  // 导入工具方法
+  import {toArray} from '../../common/js/tools'
 
   export default {
     data () {
       return {
-        placeholderText: '请输入想要搜索的内容',
-        searchRes: []
+        // 搜索框的占位内容
+        placeholderText: '这里是首页自定义的内容',
+        // 轮播图数据
+        bannerPic: [],
+        // 选择专业数据
+        professionData: [],
+        // 课程列表数据
+        courseListData: []
       }
     },
     components: {
@@ -32,16 +42,27 @@
       CourseList
     },
     methods:  {
-      search(searchValue) {
-        console.log(searchValue)
+      // 开始搜索, 并展示搜索结果
+      goSearch(name) {
+        this.$router.push({
+          path: `/show/${name}`
+        })
       }
     },
-    // 获取数据, 渲染页面
     created () {
       setTimeout(() => {
-        getHomeData().then(function (respose) {
-          console.log(respose)
-        }).catch(function (err) {
+        // 获取数据, 渲染页面
+        getHomeData().then((respose) => {
+          const data = respose.data
+          if (data.status === infoParams.STATUS_OK && data.msg === infoParams.MSG_OK) {
+            // banner数据
+            this.bannerPic = toArray(data.data.pic)
+            // 选择专业数据
+            this.professionData = toArray(data.data.category)
+            // 首页需要展示的课程数据
+            this.courseListData = toArray(data.data.course)
+          }
+        }).catch((err) => {
           console.log(err)
         })
       }, 20);
@@ -71,6 +92,5 @@
         background #fff
         outline none
         border-radius 5px
-
 </style>
 

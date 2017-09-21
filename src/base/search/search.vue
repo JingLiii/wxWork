@@ -7,19 +7,17 @@
 
 <template>
   <div class="search">
-    <div class="input-out">
-      <!-- <div @click="clickPlaceholer" v-show="!inputContent" v-text="placeholder" class="placeholder">
-      </div> -->
-      <input type="search" ref="input" :placeholder="placeholder" v-model="inputContent">
-      <icon class="icon" name="search"></icon>
-      <ul class="search-list" ref="searchList">
-        <li v-for="res in searchRes" :key="res" v-text="res"></li>
-      </ul>
+    <div class="input-out" ref="test">
+      <input @keyup.enter="goSearch" type="search" ref="input" :placeholder="placeholder" v-model="inputContent">
+      <icon class="icon" name="search" ref="icon"></icon>
     </div>
   </div>
 </template>
 
 <script>
+
+  import {onEvent} from '../../common/js/dom'
+
   export default {
     name: 'Search',
     data () {
@@ -27,10 +25,31 @@
         inputContent: ''
       }
     },
-    // 只要文本框内的内容改变了, 然后稍微一等就告诉父组件.
+    created () {
+      this.initSearchEvent()
+    },
+    methods: {
+      // 为点击搜索按钮注册事件
+      initSearchEvent() {
+        const _this = this
+        setTimeout(() => {
+          const svgDom = _this.$refs.icon.$el
+          onEvent(svgDom, 'click', function () {
+            _this.$emit('goSearch', _this.inputContent)
+          })
+        }, 300);
+      },
+      goSearch() {
+        this.$emit('goSearch', this.inputContent)
+      }
+    },
     watch: {
       inputContent(newInput) {
-        this.$emit('search', newInput)
+        // 输入框有内容, 就改变搜索按钮颜色
+        this.$refs.icon.$el.style['color'] = '#168fed'
+        if (!newInput) {
+          this.$refs.icon.$el.style['color'] = ''
+        }
       }
     },
     props: {
@@ -38,19 +57,13 @@
       placeholder: {
         type: String,
         default: '提示搜索内容'
-      },
-      // 搜索结果: 展示在ul中
-      searchRes: {
-        type: Array,
-        default: function () {
-          return []
-        }
       }
     }
   }
 </script>
 
 <style lang="stylus" scoped>
+
   @import "../../common/stylus/variable.stylus"
   @import "../../common/stylus/mixin.stylus"
 
@@ -91,7 +104,5 @@
           line-height (30rem/32)
           text-align center
           border solid 1px #aaa
-
-    
 </style>
 

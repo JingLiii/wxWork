@@ -1,19 +1,19 @@
 <template>
   <ul class="course-list">
-    <li class="course-list-item">
+    <li v-for="item in propsData" :key="item.id" class="course-list-item">
       <div class="left">
-        <img class="head" src="../../common/image/01.jpg" alt="">
+        <img class="head" :src="item.headpic" alt="">
       </div>
       <div class="right">
-        <h5 class="title">国际工程动力学专业</h5>
+        <h5 class="title" v-text="item.course_name"></h5>
         <div class="desc">
-          <span class="desc-name">人物名称</span>
-          <span class="desc-college">毕业大学</span>
-          <span class="desc-major">专业名称</span>
+          <span class="desc-name" v-text="item.teacher"></span>
+          <span class="desc-college" v-text="item.tea_school"></span>
+          <span class="desc-major" v-text="item.tea_major"></span>
         </div>
         <div class="see">
-          <icon class="icon" name="search"></icon>
-          <span class="see-account">332人看过</span>
+          <icon class="icon" name="eye"></icon>
+          <span class="see-account">{{item.read_num}}人看过</span>
         </div>
       </div>
     </li>
@@ -22,7 +22,15 @@
 
 <script>
 export default {
-  name: 'CourseList'
+  name: 'CourseList',
+  props: {
+    propsData: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
+  },
 }
 </script>
 
@@ -67,10 +75,9 @@ export default {
           .icon
             width (25rem/32)
             height (25rem/32)
-            vertical-align top
+            vertical-align middle
           .see-account
             font-size (18rem/32)
-
 
 
 

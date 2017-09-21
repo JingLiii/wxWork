@@ -1,7 +1,39 @@
 // API接口文档的配置数据
+// 如果点击全部: : true
+// 没有点击全部: clickAll(默认值): false
+
+// 请求首页数据 '/home'
+// 请求课程列表数据  '/home/course_all'
+  // 如果点击全部: 传递click_all: true
+  // 如果搜索某个专业: 传递name: 专业名称
+
+import axios from 'axios'
+import QS from 'qs'
+
+// 默认参数
 export  const defaultParams = {
-  key: 'FBIUVBjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyLaInmp+qGdnifvOXFXU0/66cBwdCmNjbLXUzU+MhODHTcn2y+QK1PAMgMf0pb1xmfZS2QzlswvElpSDyu/AjL+VtS+KeoCacySt5RSsqNFsynDzweFAYUYbw+rwhVgv274PnGQ+fJH+fy0hw/LMHskousFfJHj2oHfq4e/8+NzS0jxadtv/703WbVrUJUZfd0AQvFr54GnrS6uPeNH7JOsgJ8u88tdC7HbPB4fJdps+JKEwshJMkNLLSHDu4/po+Zsc7qdjVU6LAN259r3yFwkf1W/rtPYh5/kisT88S4Xyv1vH9vF3eds+y6iZUAxMIn6pfBRtBc8ZmXoi8j0LYTGHAQAB',
-  stampTime: +new Date,
+  // 默认没有点击全部按钮
+  // clickAll: false
 }
 
-export const IP = 'http://192.168.140.75/routine'
+// 返回接受成功参数
+export const infoParams = {
+  STATUS_OK: 200,
+  MSG_OK: 'SUCCESS',
+  MSG_NOTFIND_COURSE: '您搜索的课程不存在'
+}
+
+// 请求地址
+const IP = 'http://192.168.140.75/routine'
+
+// 请求函数
+export function getData(getType, url, params) {
+  url = IP + url
+  params = QS.stringify(Object.assign({}, defaultParams, params))
+  
+  return axios[getType](url, params, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+}
