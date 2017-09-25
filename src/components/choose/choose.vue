@@ -1,6 +1,6 @@
 <template>
   <div class="choose">
-    <div @click="chooseBox(boxData.cg_name)" class="choose-box" v-for="boxData in propsData" :key="boxData.id">
+    <div @click="chooseBox(boxData.cid)" class="choose-box" v-for="boxData in propsData" :key="boxData.id">
       <img class="icon" :src="boxData.cg_lcon" alt="">
       <div class="desc" v-text="boxData.cg_name"></div>
     </div>
@@ -12,8 +12,8 @@
   export default {
     name: 'Choose',
     methods: {
-      chooseBox(name) {
-        this.$emit('selectBox', name)
+      chooseBox(cid) {
+        this.$emit('selectBox', cid)
       }
     },
     props: {

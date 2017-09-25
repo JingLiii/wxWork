@@ -43,6 +43,7 @@
     },
     methods:  {
       // 开始搜索, 并展示搜索结果
+      // 如果
       goSearch(name) {
         this.$router.push({
           path: `/show/${name}`
@@ -54,7 +55,7 @@
         // 获取数据, 渲染页面
         getHomeData().then((respose) => {
           const data = respose.data
-          if (data.status === infoParams.STATUS_OK && data.msg === infoParams.MSG_OK) {
+          if (data.code === infoParams.STATUS_OK && data.msg === infoParams.MSG_OK) {
             // banner数据
             this.bannerPic = toArray(data.data.pic)
             // 选择专业数据

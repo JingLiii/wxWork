@@ -1,6 +1,6 @@
 <template>
   <div class="show">
-    <search @goSearch="goSearch"></search>
+    <search @goSearch="goSearch" class="search"></search>
     <h5 v-show="showNotFindMsg" class="msg">抱歉, 没有找到您所需要的内容</h5>
     <course-list :propsData="courseListData"></course-list>
   </div>
@@ -31,7 +31,7 @@
         // 专业名称发生变化, 更改专业列表
         getSearchData(name).then((res) => {
           const data = res.data
-          if (data.status === infoParams.STATUS_OK && data.msg === infoParams.MSG_OK) {
+          if (data.code === infoParams.STATUS_OK && data.msg === infoParams.MSG_OK) {
             this.courseListData = toArray(data.data)
             this.showNotFindMsg = false
           } else if (data.msg === infoParams.MSG_NOTFIND_COURSE) {

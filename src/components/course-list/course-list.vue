@@ -1,21 +1,23 @@
 <template>
   <ul class="course-list">
     <li v-for="item in propsData" :key="item.id" class="course-list-item">
-      <div class="left">
-        <img class="head" :src="item.headpic" alt="">
-      </div>
-      <div class="right">
-        <h5 class="title" v-text="item.course_name"></h5>
-        <div class="desc">
-          <span class="desc-name" v-text="item.teacher"></span>
-          <span class="desc-college" v-text="item.tea_school"></span>
-          <span class="desc-major" v-text="item.tea_major"></span>
+      <a :href="item.url">
+        <div class="left">
+          <img class="head" :src="item.headpic" alt="">
         </div>
-        <div class="see">
-          <icon class="icon" name="eye"></icon>
-          <span class="see-account">{{item.read_num}}人看过</span>
+        <div class="right">
+          <h5 class="title" v-text="item.course_name"></h5>
+          <div class="desc">
+            <span class="desc-name" v-text="item.teacher"></span>
+            <span class="desc-college" v-text="item.tea_school"></span>
+            <span class="desc-major" v-text="item.tea_major"></span>
+          </div>
+          <div class="see">
+            <icon class="icon" name="eye"></icon>
+            <span class="see-account">{{item.read_num}}人看过</span>
+          </div>
         </div>
-      </div>
+      </a>
     </li>
   </ul>
 </template>
