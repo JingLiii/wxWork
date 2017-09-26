@@ -2,7 +2,9 @@
   <div class="show">
     <search @goSearch="goSearch" class="search"></search>
     <h5 v-show="showNotFindMsg" class="msg">抱歉, 没有找到您所需要的内容</h5>
-    <course-list :propsData="courseListData"></course-list>
+    <transition name="fade">
+      <course-list :propsData="courseListData" class="course-list"></course-list>
+    </transition>
   </div>
 </template>
 
@@ -55,6 +57,20 @@
 
 <style lang="stylus" scoped>
   @import "../../common/stylus/variable.stylus"
+
+  .fade-enter {
+    opacity: 0;
+  }
+  .fade-leave { 
+    opacity: 1;
+  }
+  .fade-enter-active {
+    transition: opacity  2s;
+  }
+  .fade-leave-active {
+    transition: opacity  2s;
+  }
+
   .show
     .msg
       font-size $font-size-text-large-x
