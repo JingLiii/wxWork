@@ -24,7 +24,7 @@ export const infoParams = {
 }
 
 // 请求地址
-const IP = 'http://192.168.140.75/routine'
+const IP = 'http://101.200.130.8/routine'
 
 // 请求函数
 export function getData(getType, url, params) {
