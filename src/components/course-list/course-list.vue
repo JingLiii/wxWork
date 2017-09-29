@@ -1,7 +1,7 @@
 <template>
   <ul class="course-list">
     <li v-for="item in propsData" :key="item.id" class="course-list-item">
-      <a :href="item.url">
+      <a :href="item.url" @click="readCourse(item.id)">
         <div class="left">
           <img class="head" :src="item.headpic" alt="">
         </div>
@@ -23,6 +23,9 @@
 </template>
 
 <script>
+
+import postCouseList from '../../api/course-list'
+
 export default {
   name: 'CourseList',
   props: {
@@ -33,6 +36,12 @@ export default {
       }
     }
   },
+  methods: {
+    // 点击课程后, 为课程阅读量+1
+    readCourse(courseId) {
+      postCouseList(courseId)
+    }
+  }
 }
 </script>
 

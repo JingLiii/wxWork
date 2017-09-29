@@ -2,18 +2,14 @@
 // 如果点击全部: : true
 // 没有点击全部: clickAll(默认值): false
 
-// 请求首页数据 '/home'
-// 请求课程列表数据  '/home/course_all'
-  // 如果点击全部: 传递click_all: true
-  // 如果搜索某个专业: 传递name: 专业名称
+
 
 import axios from 'axios'
 import QS from 'qs'
 
 // 默认参数
 export  const defaultParams = {
-  // 默认没有点击全部按钮
-  // clickAll: false
+  
 }
 
 // 返回接受成功参数
