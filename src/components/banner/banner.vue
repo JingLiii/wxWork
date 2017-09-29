@@ -15,10 +15,6 @@
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
 
-  import a from '../../common/image/01.jpg'
-  import b from '../../common/image/02.jpg'
-  import c from '../../common/image/03.jpg'
-
   export default {
     props: {
       listImg: {
