@@ -1,7 +1,12 @@
 <template>
   <ul class="course-list">
     <li v-for="item in propsData" :key="item.id" class="course-list-item">
-      <a :href="item.url" @click="readCourse(item.id)">
+      <a
+        href="javascript:;"
+        @touchstart="touchstart($event)"
+        @touchend="touchend($event, item.id, item.url)"
+      >
+      <!-- <a  @touchend="readCourse(item.id)"> -->
         <div class="left">
           <img class="head" :src="item.headpic" alt="">
         </div>
@@ -26,8 +31,17 @@
 
 import postCouseList from '../../api/course-list'
 
+// 导入api文档
+import {infoParams, commOK} from '../../api/config'
+
 export default {
   name: 'CourseList',
+  data () {
+    return {
+      // 点击的某个课程id
+      touchendCouseId: ''  
+    }
+  },
   props: {
     propsData: {
       type: Array,
@@ -36,10 +50,60 @@ export default {
       }
     }
   },
+  beforeDestroy() {
+    // alert('beforeDestroy')
+  },
+  destroyed () {
+    alert('destroyed')
+    this.postCouseList(this.touchendCouseId)
+  },
   methods: {
-    // 点击课程后, 为课程阅读量+1
-    readCourse(courseId) {
-      postCouseList(courseId)
+    // 点击课程后, 
+    touchend(event, courseId, courseUrl) {
+      // alert('touched')
+      // 两次点击的时间小于5秒, 
+      // if (this.touchEndTime && (+new Date - this.touchEndTime < 2000)) {
+      //   return
+      // }
+      // 记录下第一次离开的时间
+      this.touchEndTime = (+new Date)
+
+      // 在手离开的时候, 需要判断是否产生了移动, 以及是否点击了很长时间
+      if (event.changedTouches[0].clientX === this.touchStartX) {
+        // 证明没有移动
+        if (+new Date - this.touchstartTime <= 500) {
+          // 证明点击的时间很短
+          // 点击后让其加载新的文档, 
+          this.touchendCouseId = courseId
+          window.location.assign(courseUrl)
+          this.$destroy()
+        }
+      }
+    },
+
+    touchstart(event) {
+      this.touchstartTime = +new Date
+      this.touchStartX = event.changedTouches[0].clientX
+    },
+
+    // 请求服务器, 传入id的课程的阅读量+1
+    postCouseList(courseId) {
+      postCouseList(courseId).then((res) => {
+        if (commOK(res.data)) { // 判断数据获取成功
+          // 修改对应id的课程数据
+          this.reviseCourseRead(courseId, res.data.data)
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    // // 根据课程id, 修改课程阅读量
+    reviseCourseRead(courseId, readCount) {
+      this.propsData.forEach((item, index) => {
+        if (item.id === courseId) {
+          item.read_num = readCount
+        }
+      })
     }
   }
 }
@@ -89,9 +153,5 @@ export default {
             vertical-align middle
           .see-account
             font-size (18rem/32)
-
-
-
-
 </style>
  

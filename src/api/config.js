@@ -18,6 +18,14 @@ export const infoParams = {
   MSG_OK: 'SUCCESS',
   MSG_NOTFIND_COURSE: '您搜索的课程不存在'
 }
+// 判断接受成功
+export function commOK(returnData) {
+  if (returnData.code === infoParams.STATUS_OK && returnData.msg === infoParams.MSG_OK) {
+    return true
+  } else {
+    return false
+  }
+}
 
 // 请求地址
 const IP = 'http://yitihua.org/xuezhang360/routine'

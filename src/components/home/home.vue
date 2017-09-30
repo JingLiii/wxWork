@@ -56,7 +56,6 @@
         getHomeData().then((respose) => {
           const data = respose.data
           if (data.code === infoParams.STATUS_OK && data.msg === infoParams.MSG_OK) {
-            console.log(data)
             // banner数据
             this.bannerPic = toArray(data.data.pic)
             // 选择专业数据
