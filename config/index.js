@@ -4,8 +4,8 @@ var path = require('path')
 module.exports = {
   build: {
     env: require('./prod.env'),
-    index: path.resolve(__dirname, '../../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../../dist'),
+    index: path.resolve(__dirname, 'E:/dist/index.html'),
+    assetsRoot: path.resolve(__dirname, 'E:/dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
     // 打包后, 不再含有map文件

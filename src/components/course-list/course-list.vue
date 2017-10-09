@@ -50,22 +50,13 @@ export default {
       }
     }
   },
-  beforeDestroy() {
-    // alert('beforeDestroy')
-  },
   destroyed () {
-    alert('destroyed')
+    // 组件销毁的时候, 请求服务器
     this.postCouseList(this.touchendCouseId)
   },
   methods: {
     // 点击课程后, 
     touchend(event, courseId, courseUrl) {
-      // alert('touched')
-      // 两次点击的时间小于5秒, 
-      // if (this.touchEndTime && (+new Date - this.touchEndTime < 2000)) {
-      //   return
-      // }
-      // 记录下第一次离开的时间
       this.touchEndTime = (+new Date)
 
       // 在手离开的时候, 需要判断是否产生了移动, 以及是否点击了很长时间
@@ -97,7 +88,8 @@ export default {
         console.log(err)
       })
     },
-    // // 根据课程id, 修改课程阅读量
+
+    // 根据课程id, 修改课程阅读量
     reviseCourseRead(courseId, readCount) {
       this.propsData.forEach((item, index) => {
         if (item.id === courseId) {
