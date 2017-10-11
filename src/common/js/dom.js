@@ -10,3 +10,5 @@ export function onEvent(dom, event, handler) {
     }
   }
 }
+
+// 使用touch时间模仿点击事件

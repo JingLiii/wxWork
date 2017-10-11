@@ -53,6 +53,12 @@ export default {
   destroyed () {
     // 组件销毁的时候, 请求服务器
     this.postCouseList(this.touchendCouseId)
+    // 清除缓存
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) {
+        location.reload()
+      }
+    })
   },
   methods: {
     // 点击课程后, 
